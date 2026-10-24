@@ -187,6 +187,8 @@ public class FASTAReader {
 			try {
 				if (compareImproved(pattern, i))
 					lista.add(i);
+				// if (compare(pattern, i))
+					// lista.add(i);
 				
 			} catch (FASTAException e) {
 				System.out.println(e.getMessage());
