@@ -96,6 +96,35 @@ public class FASTAReaderSuffixes extends FASTAReader {
 			if (index == pattern.length) {
 				resultados.add(posSuffix);
 				found = true;
+				
+				// recorrido hacia atrás
+				int i = 1;
+				do {
+					index = 0;
+					posSuffix = this.suffixes[m-i].suffixIndex;
+					
+					while (pattern[index] == content[posSuffix + index] && index < pattern.length && posSuffix + index < validBytes)
+						index++;
+					
+					if (index == pattern.length)
+						resultados.add(posSuffix);
+					i++;
+				} while (index == pattern.length);
+				
+				// recorrido hacia delante
+				i = 1;
+				do {
+					index = 0;
+					posSuffix = this.suffixes[m+i].suffixIndex;
+					
+					while (pattern[index] == content[posSuffix + index] && index < pattern.length && posSuffix + index < validBytes)
+						index++;
+					
+					if (index == pattern.length)
+						resultados.add(posSuffix);
+					i++;
+				} while (index == pattern.length);
+				
 			} else {
 				if (pattern[index] < content[posSuffix + index])
 					hi = m--;
